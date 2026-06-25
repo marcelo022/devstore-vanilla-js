@@ -4,69 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevStore Pro | Checkout & Pagamento</title>
-    <!-- Bootstrap 5.3.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
+        /* ==========================================================================
+           DESIGN SYSTEM (Marcelo Campos Portfolio Blueprint)
+           ========================================================================== */
         :root {
-            --bs-body-bg: #090d16;
-            --bs-surface-bg: #111827;
-            --accent-primary: #22c55e;
-            --panel-bg: #1f2937;
+            --bg-base: #07090e;
+            --bg-secondary: #11151e;
+            --surface-glass: rgba(30, 41, 59, 0.65);
+            --surface-glass-solid: rgba(15, 23, 42, 0.95);
+            --surface-border: rgba(255, 255, 255, 0.12);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --brand-color: #00ff73;
+            --brand-glow: rgba(0, 255, 115, 0.25);
+            --brand-gradient: linear-gradient(135deg, #00ff73 0%, #00b34a 100%);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bs-body-bg);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
             letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Correções de visibilidade de textos no Dark Mode */
+        p, .text-muted, .form-text {
+            color: var(--text-muted) !important;
+        }
+        h1, h2, h3, h4, h5, h6, .form-label {
+            color: var(--text-main) !important;
         }
 
         .checkout-box {
-            background-color: var(--bs-surface-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
+            background: var(--surface-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--surface-border);
+            border-radius: 20px;
             padding: 2rem;
         }
 
+        /* Estilização das Abas Laterais (Pills) */
         .nav-pills .nav-link {
             background-color: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            color: #9ca3af;
+            border: 1px solid var(--surface-border);
+            color: var(--text-muted);
             font-weight: 500;
             margin-bottom: 0.5rem;
-            transition: all 0.2s ease;
+            transition: var(--transition);
             text-align: left;
             padding: 1rem;
             border-radius: 12px;
         }
 
         .nav-pills .nav-link.active, .nav-pills .nav-link:hover {
-            background-color: rgba(34, 197, 94, 0.1);
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
+            background: rgba(0, 255, 115, 0.08);
+            border-color: var(--brand-color);
+            color: var(--brand-color) !important;
+        }
+
+        /* Inputs customizados premium */
+        .form-control {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--surface-border);
+            color: var(--text-main);
+            padding: 12px 16px;
+            border-radius: 10px;
+        }
+        .form-control:focus {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 4px var(--brand-glow);
+        }
+
+        /* Botão Neo-Primary do Portefólio */
+        .btn-neo-primary {
+            background: var(--brand-gradient);
+            color: #000 !important;
+            font-weight: 700;
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 4px 15px var(--brand-glow);
+            transition: var(--transition);
+        }
+        .btn-neo-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 115, 0.4);
         }
 
         .qrcode-box {
             background: #ffffff;
             padding: 1.5rem;
-            border-radius: 12px;
+            border-radius: 16px;
             display: inline-block;
         }
 
         .pix-key-box {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 0.75rem;
+            background-color: var(--bg-secondary);
+            border: 1px dashed var(--surface-border);
+            border-radius: 10px;
+            padding: 1rem;
             font-family: monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             word-break: break-all;
+        }
+
+        /* MODAL DE SUCESSO PREMIUM (Tela Bonitinha) */
+        .modal-content {
+            background: var(--surface-glass-solid);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 115, 0.3);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .success-icon-wrapper {
+            font-size: 4.5rem;
+            color: var(--brand-color);
+            animation: scaleUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes scaleUp {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
@@ -75,22 +145,22 @@
     <div class="container my-5">
         <div class="row mb-4">
             <div class="col-12">
-                <!-- LINK CORRIGIDO PARA INDEX.HTML -->
-                <a href="index.html" class="btn btn-link text-secondary p-0 text-decoration-none">
+                <a href="index.html" class="btn btn-link text-secondary p-0 text-decoration-none transition">
                     <i class="bi bi-arrow-left-short fs-4 align-middle"></i> Voltar ao Catálogo
                 </a>
             </div>
         </div>
 
         <div class="row g-4">
-            <!-- COLUNA DA ESQUERDA: FORMAS DE PAGAMENTO -->
             <div class="col-lg-8">
                 <div class="checkout-box">
-                    <h2 class="fw-bold mb-4 fs-4"><i class="bi bi-shield-lock-fill text-success me-2"></i>Escolha como Pagar</h2>
+                    <h2 class="fw-bold mb-4 fs-4 d-flex align-items-center gap-2">
+                        <i class="bi bi-shield-lock" style="color: var(--brand-color);"></i> Finalizar Pagamento
+                    </h2>
                     
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <div class="nav flex-column nav-pills" id="paymentTabs" role="tablist" aria-orientation="vertical">
+                            <div class="nav flex-column nav-pills" id="paymentTabs" role="tablist">
                                 <button class="nav-link active" id="tab-pix" data-bs-toggle="pill" data-bs-target="#content-pix" type="button" role="tab">
                                     <i class="bi bi-qr-code-scan me-2"></i> Pix Instantâneo
                                 </button>
@@ -106,77 +176,73 @@
                         <div class="col-md-8">
                             <div class="tab-content p-2" id="paymentTabsContent">
                                 
-                                <!-- CONTEÚDO: PIX -->
                                 <div class="tab-pane fade show active" id="content-pix" role="tabpanel">
-                                    <h4 class="fw-bold fs-5 mb-2">Pague com Pix</h4>
-                                    <p class="text-secondary small mb-4">O processamento é imediato e seguro. Escaneie o código abaixo com o app do seu banco.</p>
+                                    <h4 class="fw-bold fs-5 mb-2">Pague via Pix</h4>
+                                    <p class="text-muted small mb-4">Aprovação em tempo real. Escaneie o QR Code abaixo usando o aplicativo do seu banco.</p>
                                     
                                     <div class="text-center mb-4">
                                         <div class="qrcode-box shadow-sm">
-                                            <svg width="160" height="160" viewBox="0 0 100 100" fill="#000000" xmlns="http://www.w3.org/2000/svg">
+                                            <svg width="150" height="150" viewBox="0 0 100 100" fill="#000000" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M0 0h30v10H10v20H0V0zm70 0h30v30h-10V10H70V0zM0 70h10v20h20v10H0V70zm100 0v30H70v-10h20V70h10z" />
                                                 <path d="M20 20h10v10H20V20zm0 50h10v10H20V70zm50-50h10v10H70V20zm-20 20h10v10H50V40zm20 20h10v10H70V60z" />
-                                                <path d="M35 35h10v10H35V35zm20 0h10v10H55V35zm-20 20h10v10H35V55zm20 20h10v10H55V75z" fill="#22c55e"/>
+                                                <path d="M35 35h10v10H35V35zm20 0h10v10H55V35zm-20 20h10v10H35V55zm20 20h10v10H55V75z" fill="#00ff73"/>
                                                 <circle cx="50" cy="50" r="4" fill="#000000"/>
                                             </svg>
                                         </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label text-secondary small fw-medium">Código Pix Copia e Cola</label>
-                                        <div class="d-flex gap-2">
-                                            <div class="pix-key-box flex-grow-1 text-truncate" id="pixKey">
-                                                00020101021226830014br.gov.bcb.pix2561devstore-checkout-api-prod-2026-sandbox-key-br5920DevStoreCorporation6009SaoPaulo62070503000
-                                            </div>
-                                            <button class="btn btn-outline-success px-3" onclick="copyPixKey()" title="Copiar Chave">
-                                                <i class="bi bi-copy"></i>
-                                            </button>
+                                    <div class="mb-4">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <label class="form-label small text-muted mb-0">Código Copia e Cola</label>
+                                            <button class="btn btn-link text-success p-0 text-decoration-none small" onclick="copyPixKey()">Copiar Código</button>
+                                        </div>
+                                        <div class="pix-key-box text-truncate" id="pixKey">
+                                            00020101021226830014br.gov.bcb.pix2561devstore-checkout-api-prod-2026-sandbox-key-br5920DevStoreCorporation6009SaoPaulo62070503000
                                         </div>
                                     </div>
                                     
-                                    <button class="btn btn-success w-100 mt-3 py-2.5 fw-bold text-dark rounded-3" onclick="finalizePayment('Pix')">
-                                        Já efetuei o pagamento via Pix
+                                    <button class="btn btn-neo-primary w-100 py-2.5" onclick="triggerSuccessModal('Pix')">
+                                        Confirmar Pagamento Pix
                                     </button>
                                 </div>
 
-                                <!-- CONTEÚDO: CARTÃO DE CRÉDITO -->
                                 <div class="tab-pane fade" id="content-card" role="tabpanel">
                                     <h4 class="fw-bold fs-5 mb-3">Cartão de Crédito</h4>
                                     <form id="cardForm" onsubmit="processCardPayment(event)">
                                         <div class="mb-3">
-                                            <label class="form-label small text-secondary">Número do Cartão</label>
-                                            <input type="text" class="form-control rounded-3" placeholder="0000 0000 0000 0000" required>
+                                            <label class="form-label small">Número do Cartão</label>
+                                            <input type="text" class="form-control" placeholder="0000 0000 0000 0000" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label small text-secondary">Nome impresso no Cartão</label>
-                                            <input type="text" class="form-control rounded-3" placeholder="NOME COMPLETO" required>
+                                            <label class="form-label small">Nome do Titular</label>
+                                            <input type="text" class="form-control" placeholder="Como impresso no cartão" required>
                                         </div>
-                                        <div class="row g-2">
+                                        <div class="row g-2 mb-4">
                                             <div class="col-7">
-                                                <label class="form-label small text-secondary">Validade</label>
-                                                <input type="text" class="form-control rounded-3" placeholder="MM/AA" required>
+                                                <label class="form-label small">Validade</label>
+                                                <input type="text" class="form-control" placeholder="MM/AA" required>
                                             </div>
                                             <div class="col-5">
-                                                <label class="form-label small text-secondary">CVV</label>
-                                                <input type="text" class="form-control rounded-3" placeholder="000" required>
+                                                <label class="form-label small">CVV</label>
+                                                <input type="text" class="form-control" placeholder="000" required>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-success w-100 mt-4 py-2.5 fw-bold text-dark rounded-3">
-                                            Confirmar e Pagar com Crédito
+                                        <button type="submit" class="btn btn-neo-primary w-100 py-2.5">
+                                            Finalizar Compra no Cartão
                                         </button>
                                     </form>
                                 </div>
 
-                                <!-- CONTEÚDO: BOLETO BANCÁRIO -->
                                 <div class="tab-pane fade" id="content-boleto" role="tabpanel">
                                     <h4 class="fw-bold fs-5 mb-2">Boleto Bancário</h4>
-                                    <p class="text-secondary small mb-4">O boleto será gerado com vencimento para 3 dias úteis. Compensação em até 48 horas.</p>
-                                    <div class="bg-dark border border-secondary border-opacity-25 rounded-3 p-4 text-center mb-4">
-                                        <i class="bi bi-upc fs-1 text-secondary"></i>
-                                        <div class="text-secondary small mt-2">Cód: 34191.79001 01043.513184 91020.150008 7 97230000045000</div>
+                                    <p class="text-muted small mb-4">Vencimento em 3 dias úteis. O pedido é liberado após a compensação bancária.</p>
+                                    
+                                    <div class="bg-dark border rounded-3 p-4 text-center mb-4" style="border-color: var(--surface-border) !important;">
+                                        <i class="bi bi-upc fs-1 text-secondary d-block mb-2"></i>
+                                        <div class="text-muted small font-monospace">34191.79001 01043.513184 91020.150008 7 97230000045000</div>
                                     </div>
-                                    <button class="btn btn-success w-100 py-2.5 fw-bold text-dark rounded-3" onclick="processBoletoPayment()">
-                                        Gerar Boleto e Concluir Pedido
+                                    <button class="btn btn-neo-primary w-100 py-2.5" onclick="triggerSuccessModal('Boleto Bancário')">
+                                        Gerar Boleto e Concluir
                                     </button>
                                 </div>
 
@@ -186,64 +252,86 @@
                 </div>
             </div>
 
-            <!-- COLUNA DA DIREITA: RESUMO DO PEDIDO -->
             <div class="col-lg-4">
                 <div class="checkout-box bg-dark-subtle">
                     <h3 class="fw-bold fs-5 mb-4">Resumo do Pedido</h3>
-                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-secondary border-opacity-10">
-                        <span class="text-secondary small">Total dos Produtos:</span>
+                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-secondary border-opacity-25">
+                        <span class="text-muted small">Subtotal:</span>
                         <span class="fw-semibold text-white" id="summary-subtotal">R$ 0,00</span>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-secondary border-opacity-10">
-                        <span class="text-secondary small">Frete:</span>
+                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-secondary border-opacity-25">
+                        <span class="text-muted small">Frete:</span>
                         <span class="text-success small fw-medium">Grátis</span>
                     </div>
                     <div class="d-flex justify-content-between align-items-center pt-3 mt-2">
-                        <span class="fw-bold fs-6">Valor Total:</span>
-                        <span class="fw-bold fs-4 text-success" id="summary-total">R$ 0,00</span>
+                        <span class="fw-bold fs-6">Total:</span>
+                        <span class="fw-bold fs-4" style="color: var(--brand-color);" id="summary-total">R$ 0,00</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap 5.3.3 JS Bundle -->
+    <div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="success-icon-wrapper mb-3">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+                <h3 class="fw-bold mb-2">Pedido Recebido!</h3>
+                <p class="text-muted mb-4 small" id="successModalMessage">Seu pagamento foi processado e aceito com sucesso no ecossistema da aplicação.</p>
+                <button type="button" class="btn btn-neo-primary w-100 py-2.5" onclick="redirectToCatalog()">
+                    Voltar ao Catálogo
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // Captura o estado global do total calculado no LocalStorage
         const checkoutTotal = parseFloat(localStorage.getItem('devstore_checkout_total')) || 0;
 
         const formatBRL = (value) => {
             return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
         };
 
+        // Renderização dos dados na UI do Checkout
         document.getElementById('summary-subtotal').textContent = formatBRL(checkoutTotal);
         document.getElementById('summary-total').textContent = formatBRL(checkoutTotal);
 
         function copyPixKey() {
             const keyText = document.getElementById('pixKey').innerText;
             navigator.clipboard.writeText(keyText).then(() => {
-                alert('🚀 Código Pix Copia e Cola copiado para a área de transferência!');
+                alert('Código Pix copiado!');
             });
         }
 
-        function finalizePayment(methodName) {
-            alert(`🎉 Sucesso! Pagamento via ${methodName} simulado com êxito. O carrinho de compras foi limpo.`);
-            
-            localStorage.removeItem('devstore_premium_cart');
-            localStorage.removeItem('devstore_checkout_total');
-            
-            // REDIRECIONAMENTO CORRIGIDO PARA INDEX.HTML
-            window.location.href = 'index.html';
+        // Exibe a tela customizada de sucesso (Bootstrap Modal)
+        function triggerSuccessModal(methodName) {
+            const msgEl = document.getElementById('successModalMessage');
+            if(methodName === 'Boleto Bancário') {
+                msgEl.textContent = `Seu Boleto foi gerado com sucesso! O pedido será processado assim que o banco confirmar a compensação.`;
+            } else {
+                msgEl.textContent = `Seu pagamento via ${methodName} foi aprovado instantaneamente. Obrigado por testar meu portfólio!`;
+            }
+
+            // Inicializa e exibe o componente Modal nativo do Bootstrap
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
         }
 
         function processCardPayment(e) {
-            e.preventDefault();
-            finalizePayment('Cartão de Crédito');
+            e.preventDefault(); // Evita recarregamento síncrono do HTML
+            triggerSuccessModal('Cartão de Crédito');
         }
 
-        function processBoletoPayment() {
-            finalizePayment('Boleto Bancário');
+        // Limpa o estado global do carrinho e redireciona de forma limpa para a home do e-commerce
+        function redirectToCatalog() {
+            localStorage.removeItem('devstore_premium_cart');
+            localStorage.removeItem('devstore_checkout_total');
+            window.location.href = 'index.html';
         }
     </script>
 </body>

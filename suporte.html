@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevStore Pro | Suporte e Reclamações</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* ==========================================================================
+           DESIGN SYSTEM (Sincronizado com index.html e pagamento.html)
+           ========================================================================== */
+        :root {
+            --bg-base: #07090e;
+            --bg-secondary: #11151e;
+            --surface-glass: rgba(30, 41, 59, 0.65);
+            --surface-glass-solid: rgba(15, 23, 42, 0.95);
+            --surface-border: rgba(255, 255, 255, 0.12);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --brand-color: #00ff73;
+            --brand-glow: rgba(0, 255, 115, 0.25);
+            --brand-gradient: linear-gradient(135deg, #00ff73 0%, #00b34a 100%);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        p, .text-muted, .form-text { color: var(--text-muted) !important; }
+        h1, h2, h3, h4, h5, h6, .form-label { color: var(--text-main) !important; }
+
+        .support-box {
+            background: var(--surface-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--surface-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+
+        /* Inputs customizados premium */
+        .form-control, .form-select {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--surface-border);
+            color: var(--text-main);
+            padding: 12px 16px;
+            border-radius: 10px;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 4px var(--brand-glow);
+        }
+        
+        /* Ajuste específico para o select no modo escuro */
+        .form-select option {
+            background-color: var(--bg-secondary);
+            color: var(--text-main);
+        }
+
+        /* Botão Neo-Primary */
+        .btn-neo-primary {
+            background: var(--brand-gradient);
+            color: #000 !important;
+            font-weight: 700;
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 4px 15px var(--brand-glow);
+            transition: var(--transition);
+        }
+        .btn-neo-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 115, 0.4);
+        }
+
+        /* Ícones de Contato Rápido */
+        .contact-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            height: 100%;
+        }
+        .contact-card:hover {
+            border-color: rgba(0, 255, 115, 0.3);
+            transform: translateY(-3px);
+        }
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--brand-color);
+            margin-bottom: 1rem;
+        }
+
+        /* MODAL DE SUCESSO PREMIUM */
+        .modal-content {
+            background: var(--surface-glass-solid);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 115, 0.3);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .success-icon-wrapper {
+            font-size: 4.5rem;
+            color: var(--brand-color);
+            animation: scaleUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes scaleUp {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5 flex-grow-1">
+        <div class="row mb-4">
+            <div class="col-12">
+                <a href="index.html" class="btn btn-link text-secondary p-0 text-decoration-none transition">
+                    <i class="bi bi-arrow-left-short fs-4 align-middle"></i> Voltar ao Catálogo
+                </a>
+            </div>
+        </div>
+
+        <div class="row mb-5 text-center justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="fw-bold tracking-tight mb-3">Como podemos ajudar?</h1>
+                <p class="text-muted lead fs-6">
+                    Teve algum problema com o seu pedido ou precisa de acionar a garantia? Preencha o formulário abaixo e a nossa equipa entrará em contacto rapidamente.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-7">
+                <div class="support-box">
+                    <h3 class="fw-bold fs-5 mb-4 d-flex align-items-center gap-2">
+                        <i class="bi bi-headset" style="color: var(--brand-color);"></i> Abrir Chamado de Suporte
+                    </h3>
+                    
+                    <form id="supportForm" onsubmit="processSupport(event)">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small">Nome Completo</label>
+                                <input type="text" class="form-control" placeholder="João Silva" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small">E-mail de Contacto</label>
+                                <input type="email" class="form-control" placeholder="joao@email.com" required>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="form-label small">Número do Pedido (Opcional)</label>
+                                <input type="text" class="form-control" placeholder="#DEV12345">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small">Motivo do Contacto</label>
+                                <select class="form-select" required>
+                                    <option value="" selected disabled>Selecione um motivo...</option>
+                                    <option value="1">Produto com defeito</option>
+                                    <option value="2">Atraso na entrega</option>
+                                    <option value="3">Recebi o item errado</option>
+                                    <option value="4">Dúvidas sobre o produto</option>
+                                    <option value="5">Outros</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label small">Descreva o ocorrido</label>
+                                <textarea class="form-control" rows="5" placeholder="Por favor, forneça o máximo de detalhes possível para agilizarmos o atendimento..." required></textarea>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-neo-primary w-100 py-3 mt-4">
+                            <i class="bi bi-send me-2"></i> Enviar Solicitação
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="d-flex flex-column gap-3 h-100">
+                    <div class="contact-card">
+                        <i class="bi bi-whatsapp contact-icon"></i>
+                        <h4 class="fw-bold fs-6">WhatsApp</h4>
+                        <p class="small text-muted mb-0">Atendimento ágil de segunda a sexta, das 09h às 18h.</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="bi bi-envelope-at contact-icon"></i>
+                        <h4 class="fw-bold fs-6">E-mail Corporativo</h4>
+                        <p class="small text-muted mb-0">suporte@devstore.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="bi bi-box-seam contact-icon"></i>
+                        <h4 class="fw-bold fs-6">Políticas de Troca</h4>
+                        <p class="small text-muted mb-0">Garantia de 30 dias para devolução gratuita em caso de defeitos de fabrico.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="supportModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="success-icon-wrapper mb-3">
+                    <i class="bi bi-envelope-check-fill"></i>
+                </div>
+                <h3 class="fw-bold mb-2">Solicitação Recebida!</h3>
+                <p class="text-muted mb-3 small">
+                    A sua mensagem foi enviada para a nossa equipa. Entraremos em contacto no prazo de 24 horas.
+                </p>
+                <div class="p-3 mb-4 rounded-3" style="background-color: var(--bg-secondary); border: 1px dashed var(--surface-border);">
+                    <span class="small text-muted d-block mb-1">O seu número de protocolo é:</span>
+                    <strong class="fs-5" style="color: var(--brand-color);" id="protocolNumber">#000000</strong>
+                </div>
+                <button type="button" class="btn btn-neo-primary w-100 py-2.5" onclick="voltarAoCatalogo()">
+                    Voltar ao Catálogo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function processSupport(e) {
+            e.preventDefault(); // Evita recarregamento síncrono do HTML
+            
+            // Gera um número de protocolo aleatório para simular um sistema real
+            const randomProtocol = Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('protocolNumber').textContent = `#DEV-${randomProtocol}`;
+
+            // Exibe a tela customizada de sucesso
+            const supportModal = new bootstrap.Modal(document.getElementById('supportModal'));
+            supportModal.show();
+        }
+
+        function voltarAoCatalogo() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
